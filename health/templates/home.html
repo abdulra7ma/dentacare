@@ -92,33 +92,37 @@
                   </p>
                </div>
                <div class="col-md-6 color-3 p-4">
-                  <h3 class="mb-2">Make an Appointment</h3>
-                  <form action="#" class="appointment-form">
+                  <h3 class="mb-2">{{ title }}</h3>
+                  <form action="" class="appointment-form" method="post">
+                    {% csrf_token %}
                      <div class="row">
                         <div class="col-sm-4">
                            <div class="form-group">
                               <div class="select-wrap">
                                  <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                 <select name="" id="" class="form-control">
+                                 {% comment %} <select name="" id="" class="form-control">
                                     <option value="">Department</option>
                                     <option value="">Teeth Whitening</option>
                                     <option value="">Teeth CLeaning</option>
                                     <option value="">Quality Brackets</option>
                                     <option value="">Modern Anesthetic</option>
-                                 </select>
+                                 </select> {% endcomment %}
+                                 {{ form.department }}
                               </div>
                            </div>
                         </div>
                         <div class="col-sm-4">
                            <div class="form-group">
                               <div class="icon"><span class="icon-user"></span></div>
-                              <input type="text" class="form-control" id="appointment_name" placeholder="Name">
+                              {% comment %} <input type="text" class="form-control" id="appointment_name" placeholder="Name"> {% endcomment %}
+                              {{ form.name }}
                            </div>
                         </div>
                         <div class="col-sm-4">
                            <div class="form-group">
                               <div class="icon"><span class="icon-paper-plane"></span></div>
-                              <input type="text" class="form-control" id="appointment_email" placeholder="Email">
+                              {% comment %} <input type="text" class="form-control" id="appointment_email" placeholder="Email"> {% endcomment %}
+                              {{ form.email }}
                            </div>
                         </div>
                      </div>
@@ -126,19 +130,23 @@
                         <div class="col-sm-4">
                            <div class="form-group">
                               <div class="icon"><span class="ion-ios-calendar"></span></div>
-                              <input type="text" class="form-control appointment_date" placeholder="Date">
+                              {% comment %} <input type="text" class="form-control appointment_date" placeholder="Date"> {% endcomment %}
+                              {{ form.date }}
+
                            </div>
                         </div>
                         <div class="col-sm-4">
                            <div class="form-group">
                               <div class="icon"><span class="ion-ios-clock"></span></div>
-                              <input type="text" class="form-control appointment_time" placeholder="Time">
+                              {% comment %} <input type="text" class="form-control appointment_time" placeholder="Time"> {% endcomment %}
+                              {{ form.time }}
                            </div>
                         </div>
                         <div class="col-sm-4">
                            <div class="form-group">
                               <div class="icon"><span class="icon-phone2"></span></div>
-                              <input type="text" class="form-control" id="phone" placeholder="Phone">
+                              {% comment %} <input type="text" class="form-control" id="phone" placeholder="Phone"> {% endcomment %}
+                              {{ form.phone }}
                            </div>
                         </div>
                      </div>

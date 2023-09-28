@@ -21,10 +21,10 @@ class Appointment(models.Model):
     department = models.CharField(
         max_length=100,
         choices=[
-            ("Teeth Whiteing", "teeth_whiteing"),
-            ("Teeth Cleaning", "teeth_cleaning"),
-            ("Quality Brackets", "quality_brackets"),
-            ("Modern Anesthetic", "modern_anesthetic"),
+            ("teeth_whiteing", "Teeth Whiteing"),
+            ("teeth_cleaning", "Teeth Cleaning"),
+            ("quality_brackets", "Quality Brackets"),
+            ("modern_anesthetic", "Modern Anesthetic"),
         ],
     )
     doctor = models.ForeignKey(
