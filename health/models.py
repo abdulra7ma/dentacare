@@ -3,7 +3,25 @@ from django.db import models
 
 class Doctor(models.Model):
     name = models.CharField(max_length=100)
+    proficiency = models.CharField(
+        max_length=100,
+        choices=[
+            ("dentist", "Dentist"),
+            ("doctor", "Doctor"),
+            ("nurse", "Nurse"),
+            ("therapist", "Therapist"),
+            ("system_analyst", "System Analyst"),
+        ],
+    )
+    description = models.TextField()
+    twitter = models.URLField(blank=True, null=True)
+    instagram = models.URLField(blank=True, null=True)
+    facebook = models.URLField(blank=True, null=True)
+    google_plus = models.URLField(blank=True, null=True)
     user = models.ForeignKey("auth.User", on_delete=models.CASCADE)
+    profile_picture = models.ImageField(
+        upload_to="images/", blank=True, null=True
+    )
 
     def __str__(self):
         """
