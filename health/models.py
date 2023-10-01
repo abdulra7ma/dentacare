@@ -58,13 +58,26 @@ class Appointment(models.Model):
         return self.name
 
 
+class Category(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        """
+        Returns a string representation of the object's name.
+        """
+        return self.name
+
+
 class Blog(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
     date = models.DateField()
-    doctor = models.ForeignKey(
-        Doctor, on_delete=models.CASCADE, blank=True, null=True
+    blog_writer = models.CharField(max_length=100, blank=True, null=True)
+    blog_views = models.IntegerField(default=0)
+    category = models.ForeignKey(
+        Category, on_delete=models.CASCADE, blank=True, null=True
     )
+    photo = models.ImageField(upload_to="images/", blank=True, null=True)
 
     def __str__(self):
         """
@@ -73,3 +86,26 @@ class Blog(models.Model):
         :return: The title of the object as a string.
         """
         return self.title
+
+
+class ContactMessage(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    subject = models.CharField(max_length=15)
+    message = models.TextField()
+    website = models.CharField(max_length=100, blank=True, null=True)
+    from_page = models.CharField(
+        max_length=100,
+        choices=[
+            ("home", "Home"),
+            ("contact", "Contact"),
+        ],
+        blank=True,
+        null=True,
+    )
+
+    def __str__(self):
+        """
+        Returns a string representation of the object's name.
+        """
+        return self.name

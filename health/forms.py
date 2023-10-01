@@ -1,5 +1,5 @@
 from django import forms
-from .models import Appointment
+from .models import Appointment, ContactMessage
 
 
 class AppointmentForm(forms.ModelForm):
@@ -34,4 +34,43 @@ class AppointmentForm(forms.ModelForm):
         )
         self.fields["phone"].widget.attrs.update(
             {"class": "form-control", "id": "phone", "placeholder": "Phone"}
+        )
+
+
+class ContactMessagePageForm(forms.ModelForm):
+    class Meta:
+        model = ContactMessage
+        fields = "__all__"
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["name"].widget.attrs.update(
+            {
+                "class": "form-control",
+                "id": "appointment_name",
+                "placeholder": "Name",
+            }
+        )
+        self.fields["email"].widget.attrs.update(
+            {
+                "class": "form-control",
+                "id": "appointment_email",
+                "placeholder": "Email",
+            }
+        )
+        self.fields["subject"].widget.attrs.update(
+            {
+                "class": "form-control",
+                "id": "subject",
+                "placeholder": "Subject",
+            }
+        )
+        self.fields["message"].widget.attrs.update(
+            {
+                "class": "form-control",
+                "id": "message",
+                "placeholder": "Message",
+                "rows": "7",
+                "cols": "30",
+            }
         )
