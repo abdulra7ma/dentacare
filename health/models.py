@@ -56,3 +56,20 @@ class Appointment(models.Model):
         :return: The name of the object as a string.
         """
         return self.name
+
+
+class Blog(models.Model):
+    title = models.CharField(max_length=100)
+    description = models.TextField()
+    date = models.DateField()
+    doctor = models.ForeignKey(
+        Doctor, on_delete=models.CASCADE, blank=True, null=True
+    )
+
+    def __str__(self):
+        """
+        Returns a string representation of the object's title.
+
+        :return: The title of the object as a string.
+        """
+        return self.title
