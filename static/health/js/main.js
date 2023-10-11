@@ -280,7 +280,11 @@
 	  'format': 'm/d/yyyy',
 	  'autoclose': true
 	});
-	$('.appointment_time').timepicker();
+	$('.appointment_time').timepicker(
+		{
+			'timeFormat': 'H:H'
+		}
+	);
 
 
 

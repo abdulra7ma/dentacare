@@ -4,7 +4,8 @@ from django.shortcuts import redirect, render
 from django.views import generic
 
 from health.forms import AppointmentForm, ContactMessagePageForm
-from health.models import Blog, Doctor
+from health.models import Appointment, Blog, Doctor
+from django.views.generic.edit import CreateView
 
 
 class HomeView(generic.TemplateView):
@@ -15,7 +16,7 @@ class ContactView(generic.FormView):
     template_name = "contact.html"
     form_class = ContactMessagePageForm
     success_url = "/"
-    
+
     def form_valid(self, form):
         form.save()
         return super().form_valid(form)
@@ -25,7 +26,6 @@ class BlogView(generic.ListView):
     template_name = "blog.html"
     queryset = Blog.objects.all()
     context_object_name = "blogs"
-
 
 
 class BlogDetailView(generic.DetailView):
@@ -48,24 +48,29 @@ class DoctorsView(generic.ListView):
     context_object_name = "doctors"
 
 
-def appointment(request):
-    if request.method == "POST":
-        form = AppointmentForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect("home")
-    else:
-        form = AppointmentForm()
+class AppointmentCreateView(CreateView):
+    model = Appointment
+    form_class = AppointmentForm
+    template_name = "home.html"
+    success_url = "/" 
 
-    return render(
-        request,
-        "home.html",
-        {
-            "form": form,
-            "title": "Make an Appointment with DentaCare",
-            "heading": "Make an Appointment",
-        },
-    )
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "Make an Appointment with DentaCare Experience"
+        context["heading"] = "Make an Appointment"
+        return context
+
+    def get_initial(self) -> dict[str, Any]:
+        return super().get_initial()
+    
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
+    
+    def form_invalid(self, form):
+        print("Form is invalid")
+        print(form.errors)
+        return super().form_invalid(form)
 
 
 def contact(request):

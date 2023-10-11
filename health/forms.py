@@ -1,3 +1,5 @@
+import datetime
+from typing import Any
 from django import forms
 from .models import Appointment, ContactMessage
 
@@ -5,7 +7,13 @@ from .models import Appointment, ContactMessage
 class AppointmentForm(forms.ModelForm):
     class Meta:
         model = Appointment
-        fields = "__all__"
+        fields = ["name", "email", "phone", "date", "time", "department"]
+        
+    def clean(self) -> dict[str, Any]:
+        print("Cleaning")
+        cleaned_data =  super().clean()
+        print(cleaned_data)
+        return cleaned_data
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
